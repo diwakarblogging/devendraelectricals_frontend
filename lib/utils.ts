@@ -51,7 +51,12 @@ export function getWhatsAppProductUrl(productName: string, whatsappNumber?: stri
 
 export function isValidPhone(phone: string): boolean {
   const cleaned = phone.replace(/[\s\-\(\)]/g, '');
-  return /^\+?\d{10,15}$/.test(cleaned);
+  const digits = cleaned.replace(/^\+?91?/, '');
+  return /^[6-9]\d{9}$/.test(digits);
+}
+
+export function stripNonDigits(value: string): string {
+  return value.replace(/\D/g, '');
 }
 
 export function getImageUrl(path?: string): string {

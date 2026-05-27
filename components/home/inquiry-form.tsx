@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { api } from '@/lib/api';
 import { useSettings } from '@/lib/settings';
-import { isValidPhone } from '@/lib/utils';
+import { isValidPhone, stripNonDigits } from '@/lib/utils';
 
 export function QuickInquiryForm() {
   const { settings } = useSettings();
@@ -24,7 +24,7 @@ export function QuickInquiryForm() {
       return;
     }
     if (!isValidPhone(formData.phone)) {
-      setError('Please enter a valid phone number (10-15 digits)');
+      setError('Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9');
       return;
     }
     setIsSubmitting(true);
@@ -111,7 +111,7 @@ export function QuickInquiryForm() {
                   <label className="block text-sm font-medium text-primary-200 mb-1">Phone Number *</label>
                   <Input
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={(e) => setFormData({ ...formData, phone: stripNonDigits(e.target.value) })}
                     placeholder="Enter your phone number"
                     type="tel"
                   />

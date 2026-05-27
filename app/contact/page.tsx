@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
-import { MAP_EMBED_URL, getWhatsAppUrl, isValidPhone } from '@/lib/utils';
+import { MAP_EMBED_URL, getWhatsAppUrl, isValidPhone, stripNonDigits } from '@/lib/utils';
 import { useSettings } from '@/lib/settings';
 import { api } from '@/lib/api';
 
@@ -31,7 +31,7 @@ export default function ContactPage() {
       return;
     }
     if (!isValidPhone(formData.phone)) {
-      setError('Please enter a valid phone number (10-15 digits)');
+      setError('Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9');
       return;
     }
     setIsSubmitting(true);
@@ -145,7 +145,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-primary-200 mb-1">Phone Number *</label>
-                  <Input value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} type="tel" placeholder="Enter your phone number" />
+                  <Input value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: stripNonDigits(e.target.value) })} type="tel" placeholder="Enter your phone number" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-primary-200 mb-1">Message *</label>

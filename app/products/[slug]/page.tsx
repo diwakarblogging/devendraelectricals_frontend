@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useSettings } from '@/lib/settings';
-import { formatPrice, getWhatsAppProductUrl, getImageUrl, isValidPhone } from '@/lib/utils';
+import { formatPrice, getWhatsAppProductUrl, getImageUrl, isValidPhone, stripNonDigits } from '@/lib/utils';
 import { api } from '@/lib/api';
 import type { Product } from '@/types';
 
@@ -223,7 +223,7 @@ export default function ProductDetailPage() {
                 />
                 <input
                   value={inquiryData.phone}
-                  onChange={(e) => setInquiryData({ ...inquiryData, phone: e.target.value })}
+                    onChange={(e) => setInquiryData({ ...inquiryData, phone: stripNonDigits(e.target.value) })}
                   placeholder="Phone Number *"
                   className="w-full h-10 rounded-lg border border-primary-600 bg-primary-800 px-3 text-sm text-white"
                   required
