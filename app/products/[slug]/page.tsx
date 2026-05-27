@@ -199,7 +199,7 @@ export default function ProductDetailPage() {
               <Button variant="outline" size="lg" onClick={() => setShowInquiry(!showInquiry)}>
                 Send Inquiry
               </Button>
-              <a href={`tel:+919876543210`}>
+              <a href={`tel:${settings.phoneNumber}`}>
                 <Button variant="secondary" size="lg" className="gap-2">
                   Call Now
                 </Button>
