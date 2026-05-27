@@ -49,6 +49,11 @@ export function getWhatsAppProductUrl(productName: string, whatsappNumber?: stri
   return getWhatsAppUrl(`I'm interested in purchasing: ${productName}`, whatsappNumber);
 }
 
+export function isValidPhone(phone: string): boolean {
+  const cleaned = phone.replace(/[\s\-\(\)]/g, '');
+  return /^\+?\d{10,15}$/.test(cleaned);
+}
+
 export function getImageUrl(path?: string): string {
   if (!path) return '/images/placeholder.svg';
   if (path.startsWith('http')) return path;

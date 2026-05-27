@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { api } from '@/lib/api';
 import { useSettings } from '@/lib/settings';
+import { isValidPhone } from '@/lib/utils';
 
 export function QuickInquiryForm() {
   const { settings } = useSettings();
@@ -20,6 +21,10 @@ export function QuickInquiryForm() {
     e.preventDefault();
     if (!formData.name || !formData.phone || !formData.message) {
       setError('Please fill in all required fields');
+      return;
+    }
+    if (!isValidPhone(formData.phone)) {
+      setError('Please enter a valid phone number (10-15 digits)');
       return;
     }
     setIsSubmitting(true);

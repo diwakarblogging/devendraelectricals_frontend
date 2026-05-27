@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useSettings } from '@/lib/settings';
-import { formatPrice, getWhatsAppProductUrl, getImageUrl } from '@/lib/utils';
+import { formatPrice, getWhatsAppProductUrl, getImageUrl, isValidPhone } from '@/lib/utils';
 import { api } from '@/lib/api';
 import type { Product } from '@/types';
 
@@ -78,6 +78,10 @@ export default function ProductDetailPage() {
 
   const handleInquirySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isValidPhone(inquiryData.phone)) {
+      alert('Please enter a valid phone number (10-15 digits)');
+      return;
+    }
     try {
       await api.post('/inquiries', {
         ...inquiryData,

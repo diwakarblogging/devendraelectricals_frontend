@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
-import { MAP_EMBED_URL, getWhatsAppUrl } from '@/lib/utils';
+import { MAP_EMBED_URL, getWhatsAppUrl, isValidPhone } from '@/lib/utils';
 import { useSettings } from '@/lib/settings';
 import { api } from '@/lib/api';
 
@@ -28,6 +28,10 @@ export default function ContactPage() {
     e.preventDefault();
     if (!formData.name || !formData.phone || !formData.message) {
       setError('Please fill in name, phone, and message');
+      return;
+    }
+    if (!isValidPhone(formData.phone)) {
+      setError('Please enter a valid phone number (10-15 digits)');
       return;
     }
     setIsSubmitting(true);
