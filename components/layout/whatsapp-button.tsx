@@ -1,12 +1,14 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { getWhatsAppUrl } from '@/lib/utils';
+import { useSettings } from '@/lib/settings';
 
 export function WhatsAppButton() {
+  const { settings } = useSettings();
   return (
     <motion.a
-      href={getWhatsAppUrl()}
+      href={getWhatsAppUrl(undefined, settings.whatsappNumber)}
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-50 flex items-center justify-center h-14 w-14 rounded-full bg-green-500 text-white shadow-lg shadow-green-500/30 hover:bg-green-600 hover:shadow-green-600/40 transition-all duration-300"

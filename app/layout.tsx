@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
+import { SettingsProvider } from '@/lib/settings';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { WhatsAppButton } from '@/components/layout/whatsapp-button';
@@ -78,6 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={inter.className} suppressHydrationWarning={true}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          <SettingsProvider>
           <div className="flex min-h-screen flex-col">
             <Header />
             <main className="flex-1">{children}</main>
@@ -91,6 +93,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               style: { background: '#1a1a2e', color: '#fff', border: '1px solid rgba(245, 158, 11, 0.2)' },
             }}
           />
+        </SettingsProvider>
         </ThemeProvider>
       </body>
     </html>

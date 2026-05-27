@@ -7,9 +7,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { api } from '@/lib/api';
-import { PHONE_NUMBER } from '@/lib/utils';
+import { useSettings } from '@/lib/settings';
 
 export function QuickInquiryForm() {
+  const { settings } = useSettings();
   const [formData, setFormData] = useState({ name: '', phone: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -71,7 +72,7 @@ export function QuickInquiryForm() {
               </div>
               <div className="pt-4">
                 <p className="text-sm text-primary-400">
-                  Or call us directly: <a href={`tel:${PHONE_NUMBER}`} className="text-brand-500 hover:underline">{PHONE_NUMBER}</a>
+                  Or call us directly: <a href={`tel:${settings.phoneNumber}`} className="text-brand-500 hover:underline">{settings.phoneNumber}</a>
                 </p>
               </div>
             </div>

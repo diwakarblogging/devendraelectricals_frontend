@@ -3,7 +3,8 @@
 import { motion } from 'framer-motion';
 import { Shield, Users, Award, TrendingUp, Star, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { getWhatsAppUrl, PHONE_NUMBER } from '@/lib/utils';
+import { useSettings } from '@/lib/settings';
+import { getWhatsAppUrl } from '@/lib/utils';
 import Link from 'next/link';
 
 const stats = [
@@ -21,6 +22,7 @@ const values = [
 ];
 
 export default function AboutPage() {
+  const { settings } = useSettings();
   return (
     <div className="min-h-screen">
       {/* Hero */}
@@ -123,10 +125,10 @@ export default function AboutPage() {
               Come visit us at our shop in Kanpur or get in touch via WhatsApp for quick assistance.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
+              <a href={getWhatsAppUrl(undefined, settings.whatsappNumber)} target="_blank" rel="noopener noreferrer">
                 <Button variant="whatsapp" size="lg">WhatsApp Us</Button>
               </a>
-              <a href={`tel:${PHONE_NUMBER}`}>
+              <a href={`tel:${settings.phoneNumber}`}>
                 <Button variant="outline" size="lg">Call Now</Button>
               </a>
               <Link href="/contact">

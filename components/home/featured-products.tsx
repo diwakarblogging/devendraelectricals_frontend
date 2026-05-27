@@ -7,10 +7,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useSettings } from '@/lib/settings';
 import { formatPrice, getWhatsAppProductUrl, getImageUrl } from '@/lib/utils';
 import type { Product } from '@/types';
 
 export function FeaturedProducts({ products, isLoading }: { products: Product[]; isLoading: boolean }) {
+  const { settings } = useSettings();
   if (isLoading) {
     return (
       <section className="py-20">
@@ -113,7 +115,7 @@ export function FeaturedProducts({ products, isLoading }: { products: Product[];
                     <div className="flex gap-2 pt-2">
                       <button
                         type="button"
-                        onClick={(e) => { e.stopPropagation(); window.open(getWhatsAppProductUrl(product.name), '_blank', 'noopener'); }}
+                        onClick={(e) => { e.stopPropagation(); window.open(getWhatsAppProductUrl(product.name, settings.whatsappNumber), '_blank', 'noopener'); }}
                         className="flex-1 text-xs bg-green-500/10 text-green-400 border border-green-500/20 rounded-lg py-2 text-center hover:bg-green-500/20 transition-colors"
                       >
                         Enquire on WhatsApp

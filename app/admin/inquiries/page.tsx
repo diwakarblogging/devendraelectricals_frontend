@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { api } from '@/lib/api';
 import { useAuth } from '@/lib/auth';
+import { useSettings } from '@/lib/settings';
 import { formatDate, getWhatsAppUrl } from '@/lib/utils';
 import type { Inquiry } from '@/types';
 import toast from 'react-hot-toast';
@@ -19,6 +20,7 @@ const statusColors: Record<string, 'destructive' | 'default' | 'success' | 'seco
 
 export default function AdminInquiriesPage() {
   const { token } = useAuth();
+  const { settings } = useSettings();
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState('');
@@ -133,7 +135,7 @@ export default function AdminInquiriesPage() {
                   <a href={`tel:${selected.phone}`} className="flex items-center gap-2 justify-center w-full h-10 rounded-lg bg-primary-700 text-white text-sm hover:bg-primary-600 transition-colors">
                     <Phone className="h-4 w-4" /> Call Now
                   </a>
-                  <a href={getWhatsAppUrl(`Hi ${selected.name}, we received your inquiry about ${selected.productName || 'our products'}.`)} target="_blank" rel="noopener noreferrer"
+                  <a href={getWhatsAppUrl(`Hi ${selected.name}, we received your inquiry about ${selected.productName || 'our products'}.`, settings.whatsappNumber)} target="_blank" rel="noopener noreferrer"
                     className="flex items-center gap-2 justify-center w-full h-10 rounded-lg bg-green-500/10 text-green-400 border border-green-500/20 text-sm hover:bg-green-500/20 transition-colors">
                     Reply on WhatsApp
                   </a>

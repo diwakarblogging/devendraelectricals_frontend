@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
-import { formatPrice, getWhatsAppProductUrl, getImageUrl } from '@/lib/utils';
+import { formatPrice, getImageUrl } from '@/lib/utils';
 import { api } from '@/lib/api';
 import type { Product, Category } from '@/types';
 import Link from 'next/link';

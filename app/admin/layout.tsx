@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   LayoutDashboard, Package, Tags, MessageSquare, Image as ImageIcon,
-  Star, Menu, X, LogOut, ChevronRight, Zap, Users
+  Star, Settings, Menu, X, LogOut, ChevronRight, Zap, Users
 } from 'lucide-react';
 import { AuthProvider, useAuth } from '@/lib/auth';
 import { Button } from '@/components/ui/button';
@@ -18,6 +18,7 @@ const sidebarLinks = [
   { href: '/admin/inquiries', label: 'Inquiries', icon: MessageSquare },
   { href: '/admin/banners', label: 'Banners', icon: ImageIcon },
   { href: '/admin/testimonials', label: 'Testimonials', icon: Star },
+  { href: '/admin/settings', label: 'Settings', icon: Settings },
 ];
 
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {

@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { Mail, Phone, MapPin, Clock, ArrowUpRight } from 'lucide-react';
-import { PHONE_NUMBER, SHOP_ADDRESS, SHOP_EMAIL, getWhatsAppUrl } from '@/lib/utils';
+import { useSettings } from '@/lib/settings';
+import { getWhatsAppUrl } from '@/lib/utils';
 
 const categories = [
   { name: 'Wires & Cables', href: '/products?category=wires-cables' },
@@ -21,6 +22,7 @@ const quickLinks = [
 ];
 
 export function Footer() {
+  const { settings } = useSettings();
   return (
     <footer className="border-t border-primary-700 bg-primary-900">
       <div className="container mx-auto">
@@ -41,7 +43,7 @@ export function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href={getWhatsAppUrl()}
+                href={getWhatsAppUrl(undefined, settings.whatsappNumber)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm text-green-400 hover:text-green-300 transition-colors"
@@ -91,21 +93,21 @@ export function Footer() {
             <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Contact Us</h3>
             <ul className="space-y-4">
               <li>
-                <a href={`tel:${PHONE_NUMBER}`} className="flex items-start gap-3 text-sm text-primary-300 hover:text-brand-500 transition-colors">
+                <a href={`tel:${settings.phoneNumber}`} className="flex items-start gap-3 text-sm text-primary-300 hover:text-brand-500 transition-colors">
                   <Phone className="h-4 w-4 mt-0.5 text-brand-500 flex-shrink-0" />
-                  <span>{PHONE_NUMBER}</span>
+                  <span>{settings.phoneNumber}</span>
                 </a>
               </li>
               <li>
-                <a href={`mailto:${SHOP_EMAIL}`} className="flex items-start gap-3 text-sm text-primary-300 hover:text-brand-500 transition-colors">
+                <a href={`mailto:${settings.shopEmail}`} className="flex items-start gap-3 text-sm text-primary-300 hover:text-brand-500 transition-colors">
                   <Mail className="h-4 w-4 mt-0.5 text-brand-500 flex-shrink-0" />
-                  <span>{SHOP_EMAIL}</span>
+                  <span>{settings.shopEmail}</span>
                 </a>
               </li>
               <li>
                 <div className="flex items-start gap-3 text-sm text-primary-300">
                   <MapPin className="h-4 w-4 mt-0.5 text-brand-500 flex-shrink-0" />
-                  <span>{SHOP_ADDRESS}</span>
+                  <span>{settings.shopAddress}</span>
                 </div>
               </li>
               <li>
@@ -143,10 +145,10 @@ export function Footer() {
             image: 'https://devendraelectricals.com/og-image.jpg',
             '@id': 'https://devendraelectricals.com',
             url: 'https://devendraelectricals.com',
-            telephone: PHONE_NUMBER,
+            telephone: settings.phoneNumber,
             address: {
               '@type': 'PostalAddress',
-              streetAddress: SHOP_ADDRESS,
+              streetAddress: settings.shopAddress,
               addressLocality: 'Kanpur',
               addressRegion: 'Uttar Pradesh',
                 postalCode: '208027',
@@ -161,7 +163,7 @@ export function Footer() {
               { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '09:00', closes: '20:00' },
               { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '10:00', closes: '17:00' },
             ],
-            sameAs: [getWhatsAppUrl()],
+            sameAs: [getWhatsAppUrl(undefined, settings.whatsappNumber)],
           }),
         }}
       />

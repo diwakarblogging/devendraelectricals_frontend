@@ -4,9 +4,11 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight, Shield, Zap, Truck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useSettings } from '@/lib/settings';
 import { getWhatsAppUrl } from '@/lib/utils';
 
 export function HeroSection() {
+  const { settings } = useSettings();
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       {/* Background Pattern */}
@@ -56,7 +58,7 @@ export function HeroSection() {
                   Explore Products <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
-              <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
+              <a href={getWhatsAppUrl(undefined, settings.whatsappNumber)} target="_blank" rel="noopener noreferrer">
                 <Button variant="whatsapp" size="lg">
                   WhatsApp Us
                 </Button>

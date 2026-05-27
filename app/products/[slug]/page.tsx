@@ -9,11 +9,13 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useSettings } from '@/lib/settings';
 import { formatPrice, getWhatsAppProductUrl, getImageUrl } from '@/lib/utils';
 import { api } from '@/lib/api';
 import type { Product } from '@/types';
 
 export default function ProductDetailPage() {
+  const { settings } = useSettings();
   const params = useParams();
   const [product, setProduct] = useState<Product | null>(null);
   const [related, setRelated] = useState<Product[]>([]);
@@ -185,7 +187,7 @@ export default function ProductDetailPage() {
 
             {/* Action Buttons */}
             <div className="flex flex-wrap gap-3 pt-4">
-              <a href={getWhatsAppProductUrl(product.name)} target="_blank" rel="noopener noreferrer">
+              <a href={getWhatsAppProductUrl(product.name, settings.whatsappNumber)} target="_blank" rel="noopener noreferrer">
                 <Button variant="whatsapp" size="lg" className="gap-2">
                   <MessageCircle className="h-5 w-5" /> Enquire on WhatsApp
                 </Button>

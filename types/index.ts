@@ -101,6 +101,13 @@ export interface ApiResponse<T> {
   currentPage?: number;
 }
 
+export interface SiteSettings {
+  whatsappNumber: string;
+  phoneNumber: string;
+  shopAddress: string;
+  shopEmail: string;
+}
+
 export interface DashboardStats {
   stats: {
     totalProducts: number;
